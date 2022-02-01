@@ -17,6 +17,9 @@ const nodeFileSystemReader = (path: string): Promise<DirectoryEntry[]> =>
       if (error) {
         return reject(error);
       }
+      if (!files.length) {
+        return resolve([]);
+      }
       let remaining = files.length;
       const entries: DirectoryEntry[] = [];
       files.forEach((file) => {
