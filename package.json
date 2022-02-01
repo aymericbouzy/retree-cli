@@ -27,7 +27,8 @@
   "scripts": {
     "test": "jest",
     "test:watch": "jest -o --watch",
-    "build": "tsc --build --clean",
+    "prebuild": "tsc --build --clean",
+    "build": "tsc",
     "lint": "eslint src/",
     "prepublish": "yarn test && yarn build"
   },
