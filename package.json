@@ -27,7 +27,7 @@
   "scripts": {
     "test": "jest",
     "test:watch": "jest -o --watch",
-    "build": "tsc",
+    "build": "tsc --build --clean",
     "lint": "eslint src/"
   },
   "dependencies": {
