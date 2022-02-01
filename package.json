@@ -29,7 +29,7 @@
     "prebuild": "tsc --build --clean",
     "build": "tsc",
     "lint": "eslint src/",
-    "prepublish": "yarn test && yarn build"
+    "prepublish": "yarn test && yarn lint && yarn build"
   },
   "dependencies": {
     "tmp-promise": "^3.0.2",
