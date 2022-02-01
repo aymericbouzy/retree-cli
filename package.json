@@ -28,7 +28,8 @@
     "test": "jest",
     "test:watch": "jest -o --watch",
     "build": "tsc --build --clean",
-    "lint": "eslint src/"
+    "lint": "eslint src/",
+    "prepublish": "yarn test && yarn build"
   },
   "dependencies": {
     "uuid": "^8.3.2",
