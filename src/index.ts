@@ -33,7 +33,13 @@ const readFile = (path: string): Promise<string> =>
 const wellKnownIgnore = ['node_modules', '.git', '.next'];
 
 async function run() {
-  const { ignore } = yargs(process.argv.slice(2))
+  const { ignore = [], directory = '.' } = yargs(process.argv.slice(2))
+    .command('* [directory]', 'Display tree in editable file', (yargs) => {
+      yargs.positional('directory', {
+        default: '.',
+        type: 'string',
+      });
+    })
     .options({
       ignore: {
         type: 'array',
@@ -41,10 +47,11 @@ async function run() {
         description: 'folder names to ignore',
       },
     })
-    .example('$0', 'Display tree')
+    .example('$0', 'Display tree in editable file')
+    .example('$0 src', 'Display only the ./src directory')
     .example('$0 --ignore coverage', 'Ignore coverage directory').argv;
 
-  const input = await readDirectory('.', {
+  const input = await readDirectory(directory as string, {
     ignore: [...wellKnownIgnore, ...ignore],
   });
 
