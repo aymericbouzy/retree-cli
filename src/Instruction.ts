@@ -37,6 +37,6 @@ export class InstructionList extends Instruction {
     return this.list
       .map((instruction) => instruction.toString())
       .filter(Boolean)
-      .join('; ');
+      .join(' && ');
   }
 }
