@@ -71,11 +71,14 @@ async function run() {
     }).toString();
 
     if (script) {
-      child_process.exec(script, async (err, stdout, stderr) => {
-        if (err || stderr) {
-          throw err || stderr;
-        }
-      });
+      child_process.exec(
+        `cd ${directory} && ${script}`,
+        async (err, stdout, stderr) => {
+          if (err || stderr) {
+            throw err || stderr;
+          }
+        },
+      );
     }
   });
 }
