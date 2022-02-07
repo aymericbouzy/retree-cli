@@ -58,9 +58,9 @@ async function run() {
   const { path } = await tmp.file({ postfix: '.yml' });
   await writeFile(path, YAML.stringify(sortKeys(input)));
 
-  child_process.exec(`$EDITOR ${path}`, async (err) => {
-    if (err) {
-      throw err;
+  child_process.exec(`$EDITOR ${path}`, async (err, stdout, stderr) => {
+    if (err || stderr) {
+      throw err || stderr;
     }
 
     const output = YAML.parse(await readFile(path));
@@ -71,7 +71,11 @@ async function run() {
     }).toString();
 
     if (script) {
-      child_process.exec(script);
+      child_process.exec(script, async (err, stdout, stderr) => {
+        if (err || stderr) {
+          throw err || stderr;
+        }
+      });
     }
   });
 }
